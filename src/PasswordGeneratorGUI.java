@@ -46,5 +46,21 @@ public class PasswordGeneratorGUI extends JFrame {
 
         // add to GUI
         add(titleLabel);
+
+
+        // create result text area
+        JTextArea passwordOutput = new JTextArea();
+
+        // prevent editing the text area
+        passwordOutput.setEditable(false);
+        passwordOutput.setFont(new Font("Dialog", Font.BOLD, 32));
+
+        // add scrollability in case output is too long
+        JScrollPane passwordOutputPane = new JScrollPane(passwordOutput);
+        passwordOutputPane.setBounds(25, 97, 479, 70);
+
+        // create a black border around the text area
+        passwordOutputPane.setBorder(BorderFactory.createLineBorder(Color.black));
+        add(passwordOutputPane);
     }
 }
