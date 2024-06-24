@@ -62,5 +62,11 @@ public class PasswordGeneratorGUI extends JFrame {
         // create a black border around the text area
         passwordOutputPane.setBorder(BorderFactory.createLineBorder(Color.black));
         add(passwordOutputPane);
+
+        // create password length label
+        JLabel passwordLengthLable = new JLabel("Password Length: ");
+        passwordLengthLable.setFont(new Font("Dialog", Font.PLAIN, 32));
+        passwordLengthLable.setBounds(25, 215, 272, 39);
+        add(passwordLengthLable);
     }
 }
