@@ -2,11 +2,15 @@ package src;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 // render the GUI components (front end)
 // this class will inherit from the JFrame class
 
 public class PasswordGeneratorGUI extends JFrame {
+    private PasswordGenerator passwordGenerator;
+
     public PasswordGeneratorGUI() {
         // render frame and add a title
         super("Password Generator");
@@ -26,6 +30,8 @@ public class PasswordGeneratorGUI extends JFrame {
         // center the GUI
         setLocationRelativeTo(null);
 
+        // init password generator
+        passwordGenerator = new PasswordGenerator();
 
         // render GUI components
         addGuiComponents();
@@ -103,14 +109,95 @@ public class PasswordGeneratorGUI extends JFrame {
         symbolsToggle.setBounds(282, 373, 225, 56);
         add(symbolsToggle);
 
+        // styles for toggled/untoggled buttons
+
+        Color myRed = new Color(204, 80, 80);
+        Color myGreen = new Color(107, 190, 90);
+
+        uppercaseToggle.setBackground(myRed); uppercaseToggle.setForeground(Color.BLACK);
+        lowercaseToggle.setBackground(myRed); lowercaseToggle.setForeground(Color.BLACK);
+        numbersToggle.setBackground(myRed); numbersToggle.setForeground(Color.BLACK);
+        symbolsToggle.setBackground(myRed); symbolsToggle.setForeground(Color.BLACK);
+
+        uppercaseToggle.setBorder(BorderFactory.createLineBorder(Color.black));
+        lowercaseToggle.setBorder(BorderFactory.createLineBorder(Color.black));
+        numbersToggle.setBorder(BorderFactory.createLineBorder(Color.black));
+        symbolsToggle.setBorder(BorderFactory.createLineBorder(Color.black));
+
+        uppercaseToggle.setUI(new javax.swing.plaf.basic.BasicToggleButtonUI());
+        lowercaseToggle.setUI(new javax.swing.plaf.basic.BasicToggleButtonUI());
+        numbersToggle.setUI(new javax.swing.plaf.basic.BasicToggleButtonUI());
+        symbolsToggle.setUI(new javax.swing.plaf.basic.BasicToggleButtonUI());
+
+
+        uppercaseToggle.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (uppercaseToggle.isSelected()) {
+                    uppercaseToggle.setBackground(myGreen);
+                } else {
+                    uppercaseToggle.setBackground(myRed);
+                }
+            }
+        });
+        lowercaseToggle.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (lowercaseToggle.isSelected()) {
+                    lowercaseToggle.setBackground(myGreen);
+                } else {
+                    lowercaseToggle.setBackground(myRed);
+                }
+            }
+        });
+        numbersToggle.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (numbersToggle.isSelected()) {
+                    numbersToggle.setBackground(myGreen);
+                } else {
+                    numbersToggle.setBackground(myRed);
+                }
+            }
+        });
+        symbolsToggle.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (symbolsToggle.isSelected()) {
+                    symbolsToggle.setBackground(myGreen);
+                } else {
+                    symbolsToggle.setBackground(myRed);
+                }
+            }
+        });
+
+
+
 
         // create generate button
         JButton generateButton = new JButton("Generate");
         generateButton.setFont(new Font("Dialog", Font.PLAIN, 32));
         generateButton.setBounds(155, 477, 222, 41);
+        generateButton.setBackground(Color.LIGHT_GRAY); generateButton.setForeground(Color.BLACK);
+        generateButton.setBorder(BorderFactory.createLineBorder(Color.black));
+        generateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // validation: generate a password only when length > 0 and one of the toggled buttons is toggled
+                if (passwordLengthInputArea.getText().length() <= 0) return;
+                boolean anyToggleSelected = lowercaseToggle.isSelected() || uppercaseToggle.isSelected() || numbersToggle.isSelected() || symbolsToggle.isSelected();
+
+                // generate password
+                // converts the text to an int value
+                int passwordLength = Integer.parseInt(passwordLengthInputArea.getText());
+                if (anyToggleSelected) {
+                    String generatedPassword = passwordGenerator.generatePassword(passwordLength, uppercaseToggle.isSelected(), lowercaseToggle.isSelected(), numbersToggle.isSelected(), symbolsToggle.isSelected());
+
+                    // display password
+                    passwordOutput.setText(generatedPassword);
+                }
+            }
+        });
         add(generateButton);
-
-
-
     }
 }
