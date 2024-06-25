@@ -4,5 +4,5 @@
 </p>
 
 <p align="center">
-  <a href="https://gyazo.com/22dba4bddd3bff6d185fe1e7f1dd39de"><img src="https://i.gyazo.com/22dba4bddd3bff6d185fe1e7f1dd39de.gif" alt="Image from Gyazo" width="518"/></a>
+  <a><img src="https://i.gyazo.com/22dba4bddd3bff6d185fe1e7f1dd39de.gif" alt="Image from Gyazo" width="518"/></a>
 </p>
